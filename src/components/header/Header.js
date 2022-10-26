@@ -1,19 +1,37 @@
 import { useState , useEffect} from "react";
-import movieApi from "../../constants/movieApi";
 import { ENDPOINTS, TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import './header.css'
 import LANGUAGES from "../../constants/Languages";
 import IMAGES from '../../constants/Images'
+import { useDispatch } from "react-redux";
+import { fetchMovieData, removeMovieData } from "../../redux/actions/movieActions";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const [term, setTerm] = useState('')
-    const [searchResults, setsearchResults] = useState({})
     const [pagination, setPagination] = useState({
         previous:0,
         current : 0,
         next : 0,
         totalPages: 0
     })
+    const movieData = useSelector((state) => state.movieReducer)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (movieData.length != 0) {
+            setPagination({
+                previous: Number(movieData.page) - 1,
+                current : movieData.page,
+                next : Number(movieData.page) + 1,
+                totalPages: movieData.total_pages
+            })
+        }
+
+        return () => {
+            dispatch(removeMovieData());
+        }
+    }, [])
 
 
     const submitHandler = (e) => {
@@ -26,29 +44,17 @@ const Header = () => {
         search(term, 1)
     }
 
-    const search = async (term, page) => {
-        const response = await movieApi.get(
-            `/search/movie?page=${page}&query=${term}`
-        );
-        
-        setsearchResults(response.data)
-        console.log(response.data)
-        setPagination({
-            previous: Number(response.data.page) - 1,
-            current : response.data.page,
-            next : Number(response.data.page) + 1,
-            totalPages: response.data.total_pages
-        })
-    }
-
-    const getLanguage = (language_iso) => { 
-        return LANGUAGES.find((language) => language.iso_639_1 === language_iso)
+    const search = (term, page) => {
+        dispatch(fetchMovieData(term, page))
     }
 
     const changePage = (page) => {
         search(term, page)
     }
 
+    const getLanguage = (language_iso) => { 
+        return LANGUAGES.find((language) => language.iso_639_1 === language_iso)
+    }
 
     return (
         <>
@@ -62,7 +68,7 @@ const Header = () => {
         </div> 
         <div>
             <div className="card-container">
-                {searchResults.results !== undefined ? ( searchResults.results.map((item, index) => {
+                {movieData.movies.length !== 0 ? ( movieData.movies.map((item, index) => {
                     
                     return <div className="card-item">
                                 <div className="card-inner">
