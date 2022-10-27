@@ -1,4 +1,5 @@
 import { useState , useEffect} from "react";
+import './search.css';
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import Header from "../../components/header/Header";
 import LANGUAGES from "../../constants/Languages";
@@ -6,16 +7,17 @@ import IMAGES from '../../constants/Images'
 import { useDispatch } from "react-redux";
 import { fetchMoviesData, removeMoviesData } from "../../redux/actions/movieActions";
 import { useSelector } from "react-redux";
-import { useMemo } from "react";
 import Spinner from "../../components/spinner/Spinner";
 
 
 const Search = () => {
     const [pagination, setPagination] = useState({
-        previous:0,
-        current : 0,
-        next : 0,
-        totalPages: 0
+        firstPage: false,
+        previous: false,
+        current : false,
+        next : false,
+        lastPage : false,
+        totalPages: false,
     })
     const moviesData = useSelector((state) => state.moviesState)
     const dispatch = useDispatch()
@@ -23,11 +25,14 @@ const Search = () => {
 
     useEffect(() => {
       if (moviesData.fetching == false) {
+         const {page, total_pages} = moviesData.data
         setPagination({
-            previous: Number(moviesData.data.page) - 1,
-            current : moviesData.data.page,
-            next : Number(moviesData.data.page) + 1,
-            totalPages: moviesData.data.total_pages
+            firstPage: page > 2 ? 1 : false,
+            previous: page > 1 ? Number(page) - 1 : false,
+            current : page,
+            next : (Number(page) + 1) <= total_pages ? Number(page) + 1 : false,
+            lastPage: (Number(page) + 1) < total_pages ? total_pages : false,
+            totalPages: total_pages
         })
       }
     }, [moviesData.fetching])
@@ -83,9 +88,11 @@ const Search = () => {
             { (moviesData.status && moviesData.data.results.length !== 0) &&
                 <div className="pagination-container">
                     <div className="pagination">
-                        <button onClick={() => changePage(pagination.previous)}>previous</button>
-                        <span>{pagination.current}</span>
-                        <button onClick={() => changePage(pagination.next)}>next</button>
+                      { pagination.firstPage  && <button onClick={() => changePage(pagination.firstPage)}>First</button>}
+                      { pagination.previous  && <button onClick={() => changePage(pagination.previous)}>Previous</button>}
+                      { pagination.current && <span>{pagination.current}</span> }
+                      { pagination.next &&  <button onClick={() => changePage(pagination.next)}>Next</button> }
+                      { pagination.lastPage &&  <button onClick={() => changePage(pagination.lastPage)}>Last</button> }
                     </div>
                 </div>
             }
