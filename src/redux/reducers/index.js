@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import { movieReducer } from "./movieReducer";
+import { moviesReducer } from "./movieReducer";
+import { searchReducer } from "./searchReducer";
 
 const reducers = combineReducers({
-    movieReducer: movieReducer,
+    moviesState: moviesReducer,
+    searchState: searchReducer
 });
 
 export default reducers;
