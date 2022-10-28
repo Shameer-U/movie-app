@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import LANGUAGES from "../../constants/Languages";
 import IMAGES from '../../constants/Images'
+import Spinner from "../../components/spinner/Spinner";
 
 const Home = () => {
     const nowPlaying = useSelector((state) => state.nowPlayingState)
@@ -75,14 +76,15 @@ const Home = () => {
             }
           }
         ]
-      };
+      }
 
 
       return (
         <>
         <Header />
+        {(nowPlaying.fetching || comingSoon.fetching)  && <Spinner />}
         <div className="home-container">
-        <h2>Now Playing</h2>
+        <h2 className="home-section-title">Now Playing</h2>
         {nowPlaying.status ? 
             (<Slider {...settings}>
                 {nowPlaying.data?.results?.map((item, index) => {
@@ -109,14 +111,14 @@ const Home = () => {
                             </div>
                 })}
             </Slider>)
-            : <div>{comingSoon.message}</div>
+            : <div className="no-result">{comingSoon.message}</div>
         }
 
-        <h2>Coming Soon</h2>
+        <h2 className="home-section-title">Coming Soon</h2>
 
         {comingSoon.status ? 
             (<Slider {...settings}>
-                {nowPlaying.data?.results?.map((item, index) => {
+                {comingSoon.data?.results?.map((item, index) => {
                     
                     return <div className="card-item">
                                 <div className="card-inner">
@@ -140,7 +142,7 @@ const Home = () => {
                             </div>
                 })}
             </Slider>)
-            : <div>{comingSoon.message}</div>
+            : <div className="no-result">{comingSoon.message}</div>
         }
 
       </div>

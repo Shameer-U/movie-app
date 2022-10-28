@@ -12,6 +12,17 @@
     padding: 0 10px;
  }
 
+.home-section-title {
+    margin: 20px 0px;
+}
+
+.no-result {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .card-item {
     /* width: 200px !important; */

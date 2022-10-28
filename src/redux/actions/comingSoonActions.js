@@ -1,7 +1,7 @@
 import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
-export const fetchComingSoon = () => async (dispatch) => {
+const fetchComingSoon = () => async (dispatch) => {
     dispatch({type:ActionTypes.FETCHING_COMING_SOON, payload: {fetching : true, isLoaded: false}})
 
     let payload;
@@ -48,8 +48,10 @@ export const fetchComingSoon = () => async (dispatch) => {
     dispatch({type:ActionTypes.FETCH_COMING_SOON, payload: payload});
 }
 
-export const removeComingSoon = () => {
+const removeComingSoon = () => {
     return {
         type: ActionTypes.REMOVE_COMING_SOON,
     }
 }
+
+export {fetchComingSoon, removeComingSoon}
