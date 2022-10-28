@@ -53,7 +53,7 @@ const Search = () => {
 
   return (
     <>
-        <Header/>
+        <Header searchWord={searchTerm}/>
         {moviesData.fetching && <Spinner />}
         <div>
             <div className="card-container">

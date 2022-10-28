@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './header.css'
 import { useDispatch } from "react-redux";
 import { fetchMoviesData } from "../../redux/actions/movieActions";
 import { addSearchTerm } from "../../redux/actions/searchActions";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
     const [searchTerm, setSearchTerm] = useState('')
     const dispatch = useDispatch() 
     const location = useLocation()
     const navigate = useNavigate()
+    const {searchWord} = props
     
     const submitHandler = (e) => {
         e.preventDefault()
@@ -29,6 +30,12 @@ const Header = () => {
     const search = (searchTerm, page) => {
         dispatch(fetchMoviesData(searchTerm, page))
     }
+
+    useEffect(() => {
+        if (searchTerm === '' && searchWord !== undefined) {
+            setSearchTerm(searchWord)
+        }
+    },[])
 
     return (
         <div className='header'>
