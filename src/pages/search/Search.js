@@ -24,7 +24,7 @@ const Search = () => {
     const searchTerm = useSelector((state) => state.searchState.term)
 
     useEffect(() => {
-      if (moviesData.fetching == false) {
+      if (moviesData.isLoaded === true) {
          const {page, total_pages} = moviesData.data
         setPagination({
             firstPage: page > 2 ? 1 : false,
@@ -35,7 +35,8 @@ const Search = () => {
             totalPages: total_pages
         })
       }
-    }, [moviesData.fetching])
+
+    }, [moviesData.isLoaded])
 
 
     const changePage = (page) => {
@@ -56,7 +57,7 @@ const Search = () => {
         {moviesData.fetching && <Spinner />}
         <div>
             <div className="card-container">
-                { moviesData.status ? ( moviesData.data.results.map((item, index) => {
+                { moviesData.status ? ( moviesData.data?.results?.map((item, index) => {
                     
                     return <div className="card-item">
                                 <div className="card-inner">
@@ -78,14 +79,14 @@ const Search = () => {
                                     </div>
                                 </div>
                             </div>
-                })) : 
+                })) : (
                 <div className="no-result">
                         <h3>{moviesData?.message}</h3>
-                </div>
+                </div> )
                 }
             </div>
   
-            { (moviesData.status && moviesData.data.results.length !== 0) &&
+            { (moviesData.status && moviesData.data?.results?.length !== 0) &&
                 <div className="pagination-container">
                     <div className="pagination">
                       { pagination.firstPage  && <button onClick={() => changePage(pagination.firstPage)}>First</button>}

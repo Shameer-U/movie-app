@@ -1,12 +1,12 @@
 import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
-export const fetchMoviesData = (term, page) => async (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_MOVIES_DATA, payload: {fetching : true, isLoaded: false}});
+export const fetchNowPlaying = () => async (dispatch) => {
+    dispatch({type:ActionTypes.FETCHING_NOW_PLAYING, payload: {fetching : true, isLoaded: false}})
 
     let payload;
     try {
-        const response = await movieApi.get(`/search/movie?page=${page}&query=${term}`);
+        const response = await movieApi.get('/movie/now_playing')
 
         if (response?.status === 200) {
             if (response?.data?.results?.length !== 0) {
@@ -45,11 +45,11 @@ export const fetchMoviesData = (term, page) => async (dispatch) => {
         };
     }
     
-    dispatch({type:ActionTypes.FETCH_MOVIES_DATA, payload:payload});
+    dispatch({type:ActionTypes.FETCH_NOW_PLAYING, payload: payload});
 }
 
-export const removeMoviesData = () => {
+export const removeNowPlaying = () => {
     return {
-        type: ActionTypes.REMOVE_MOVIES_DATA,
+        type: ActionTypes.REMOVE_NOW_PLAYING,
     }
 }

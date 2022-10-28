@@ -1,12 +1,12 @@
 import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
-export const fetchMoviesData = (term, page) => async (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_MOVIES_DATA, payload: {fetching : true, isLoaded: false}});
+export const fetchComingSoon = () => async (dispatch) => {
+    dispatch({type:ActionTypes.FETCHING_COMING_SOON, payload: {fetching : true, isLoaded: false}})
 
     let payload;
     try {
-        const response = await movieApi.get(`/search/movie?page=${page}&query=${term}`);
+        const response = await movieApi.get('/movie/upcoming')
 
         if (response?.status === 200) {
             if (response?.data?.results?.length !== 0) {
@@ -45,11 +45,11 @@ export const fetchMoviesData = (term, page) => async (dispatch) => {
         };
     }
     
-    dispatch({type:ActionTypes.FETCH_MOVIES_DATA, payload:payload});
+    dispatch({type:ActionTypes.FETCH_COMING_SOON, payload: payload});
 }
 
-export const removeMoviesData = () => {
+export const removeComingSoon = () => {
     return {
-        type: ActionTypes.REMOVE_MOVIES_DATA,
+        type: ActionTypes.REMOVE_COMING_SOON,
     }
 }

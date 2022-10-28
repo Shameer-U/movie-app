@@ -8,13 +8,13 @@ const initialState = {
     data : { }
 }
 
-export const moviesReducer = (state = initialState, {type, payload}) => {  
+export const comingSoonReducer = (state = initialState, {type, payload}) => {  
     switch (type) {
-        case ActionTypes.FETCHING_MOVIES_DATA:
+        case ActionTypes.FETCHING_NOW_PLAYING:
             return {...state, ...payload}
-        case ActionTypes.FETCH_MOVIES_DATA:
+        case ActionTypes.FETCH_NOW_PLAYING:
             return {...state,  ...payload};
-        case ActionTypes.REMOVE_MOVIES_DATA:
+        case ActionTypes.REMOVE_NOW_PLAYING:
             return initialState;
         default:
             return state;
