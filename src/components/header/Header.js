@@ -3,10 +3,13 @@ import './header.css'
 import { useDispatch } from "react-redux";
 import { fetchMoviesData } from "../../redux/actions/movieActions";
 import { addSearchTerm } from "../../redux/actions/searchActions";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
     const [searchTerm, setSearchTerm] = useState('')
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() 
+    const location = useLocation()
+    const navigate = useNavigate()
     
     const submitHandler = (e) => {
         e.preventDefault()
@@ -16,6 +19,11 @@ const Header = () => {
         }
         dispatch(addSearchTerm(searchTerm))
         search(searchTerm, 1)
+    
+        //console.log(location.pathname);
+        if(location.pathname !== '/search') {
+            navigate('/search')
+        }
     }
 
     const search = (searchTerm, page) => {

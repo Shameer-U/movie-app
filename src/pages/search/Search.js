@@ -59,7 +59,7 @@ const Search = () => {
             <div className="card-container">
                 { moviesData.status ? ( moviesData.data?.results?.map((item, index) => {
                     
-                    return <div className="card-item">
+                    return <div className="card-item" key={index}>
                                 <div className="card-inner">
                                     <div className="card-top">
                                         <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />

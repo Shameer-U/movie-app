@@ -2,7 +2,7 @@ import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
 const fetchComingSoon = () => async (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_COMING_SOON, payload: {fetching : true, isLoaded: false}})
+    dispatch({type:ActionTypes.FETCHING_COMING_SOON, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}})
 
     let payload;
     try {

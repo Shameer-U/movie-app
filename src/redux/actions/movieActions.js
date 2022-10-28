@@ -2,7 +2,7 @@ import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
 const fetchMoviesData = (term, page) => async (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_MOVIES_DATA, payload: {fetching : true, isLoaded: false}});
+    dispatch({type:ActionTypes.FETCHING_MOVIES_DATA, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}});
 
     let payload;
     try {
