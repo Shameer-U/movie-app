@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { fetchMoviesData, removeMoviesData } from "../../redux/actions/movieActions";
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/Spinner";
+import { useLocation } from "react-router-dom";
 
 
 const Search = () => {
@@ -19,6 +20,7 @@ const Search = () => {
         lastPage : false,
         totalPages: false,
     })
+    const {state } = useLocation();
     const moviesData = useSelector((state) => state.moviesState)
     const dispatch = useDispatch()
     const searchTerm = useSelector((state) => state.searchState.term)
@@ -53,7 +55,7 @@ const Search = () => {
 
   return (
     <>
-        <Header searchWord={searchTerm}/>
+        <Header searchWord={state}/>
         {moviesData.fetching && <Spinner />}
         <div>
             <div className="card-container">

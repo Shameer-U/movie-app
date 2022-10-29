@@ -23,7 +23,7 @@ const Header = (props) => {
     
         //console.log(location.pathname);
         if(location.pathname !== '/search') {
-            navigate('/search')
+            navigate('/search', { state : searchTerm})
         }
     }
 
