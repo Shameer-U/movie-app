@@ -10,7 +10,7 @@ const Header = (props) => {
     const dispatch = useDispatch() 
     const location = useLocation()
     const navigate = useNavigate()
-    const {searchWord} = props
+    const {searchWord, displayHeader} = props
     
     const submitHandler = (e) => {
         e.preventDefault()
@@ -39,12 +39,14 @@ const Header = (props) => {
 
     return (
         <div className='header'>
-            <div className='search-bar'>
-                <form onSubmit={submitHandler}>
-                    <input type="text" value={searchTerm} placeholder="Search Movies or Shows" onChange={(e) => setSearchTerm(e.target.value)} />
-                    <button type="submit"><i className='fa fa-search'></i></button>
-                </form>
-            </div>
+            { displayHeader &&
+                <div className='search-bar'>
+                    <form onSubmit={submitHandler}>
+                        <input type="text" value={searchTerm} placeholder="Search Movies or Shows" onChange={(e) => setSearchTerm(e.target.value)} />
+                        <button type="submit"><i className='fa fa-search'></i></button>
+                    </form>
+                </div>
+            }
         </div> 
     )
 }

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { fetchMoviesData, removeMoviesData } from "../../redux/actions/movieActions";
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/Spinner";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 
 const Search = () => {
@@ -55,13 +55,14 @@ const Search = () => {
 
   return (
     <>
-        <Header searchWord={state}/>
+        <Header searchWord={state} displayHeader={true}/>
         {moviesData.fetching && <Spinner />}
         <div>
             <div className="card-container">
                 { moviesData.status ? ( moviesData.data?.results?.map((item, index) => {
                     
                     return <div className="card-item" key={index}>
+                                <Link to={`/movie/${item.id}`}>
                                 <div className="card-inner">
                                     <div className="card-top">
                                         <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />
@@ -80,6 +81,7 @@ const Search = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                             </div>
                 })) : (
                 <div className="no-result">
@@ -92,9 +94,9 @@ const Search = () => {
                 <div className="pagination-container">
                     <div className="pagination">
                       { pagination.firstPage  && <button onClick={() => changePage(pagination.firstPage)}>First</button>}
-                      { pagination.previous  && <button onClick={() => changePage(pagination.previous)}>Previous</button>}
+                      { pagination.previous  && <button className="previous" onClick={() => changePage(pagination.previous)}></button>}
                       { pagination.current && <span>{pagination.current}</span> }
-                      { pagination.next &&  <button onClick={() => changePage(pagination.next)}>Next</button> }
+                      { pagination.next &&  <button className="next" onClick={() => changePage(pagination.next)}></button> }
                       { pagination.lastPage &&  <button onClick={() => changePage(pagination.lastPage)}>Last</button> }
                     </div>
                 </div>

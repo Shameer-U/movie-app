@@ -10,10 +10,13 @@ import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import LANGUAGES from "../../constants/Languages";
 import IMAGES from '../../constants/Images'
 import Spinner from "../../components/spinner/Spinner";
+import {Link } from "react-router-dom";
 
 const Home = () => {
     const nowPlaying = useSelector((state) => state.nowPlayingState)
     const comingSoon = useSelector((state) => state.comingSoonState)
+    console.log('nowPlaying', nowPlaying)
+    console.log('comingSoon', comingSoon)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -81,7 +84,7 @@ const Home = () => {
 
       return (
         <>
-        <Header />
+        <Header displayHeader={true} />
         {(nowPlaying.fetching || comingSoon.fetching)  && <Spinner />}
         <div className="home-container">
         <h2 className="home-section-title">Now Playing</h2>
@@ -90,6 +93,7 @@ const Home = () => {
                 {nowPlaying.data?.results?.map((item, index) => {
                     
                     return <div className="card-item" key={index}>
+                                <Link to={`/movie/${item.id}`}>
                                 <div className="card-inner">
                                     <div className="card-top">
                                         <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />
@@ -108,6 +112,7 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                             </div>
                 })}
             </Slider>)
@@ -121,6 +126,7 @@ const Home = () => {
                 {comingSoon.data?.results?.map((item, index) => {
                     
                     return <div className="card-item" key={index}>
+                                <Link to={`/movie/${item.id}`}>
                                 <div className="card-inner">
                                     <div className="card-top">
                                         <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />
@@ -139,6 +145,7 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                             </div>
                 })}
             </Slider>)

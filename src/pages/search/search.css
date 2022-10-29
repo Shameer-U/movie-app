@@ -118,6 +118,14 @@
     gap: 10px;
 }
 
+.pagination .next::before {
+    content: ">";
+}
+
+.pagination .previous::before {
+    content: "<";
+}
+
 .pagination button{
     padding: 10px;
     background-color: rgba(3,37,65, 1);
