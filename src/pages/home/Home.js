@@ -4,7 +4,7 @@ import './home.css';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchNowPlaying } from "../../redux/actions/nowPlayingActions";
-import { fetchComingSoon } from "../../redux/actions/comingSoonActions";
+import { fetchTopRated } from "../../redux/actions/topRatedActions";
 import Slider from "react-slick";
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import LANGUAGES from "../../constants/Languages";
@@ -14,12 +14,12 @@ import {Link } from "react-router-dom";
 
 const Home = () => {
     const nowPlaying = useSelector((state) => state.nowPlayingState);
-    const comingSoon = useSelector((state) => state.comingSoonState);
+    const topRated = useSelector((state) => state.topRatedState);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchNowPlaying())
-        dispatch(fetchComingSoon())
+        dispatch(fetchTopRated())
     }, []);
 
     const getLanguage = (language_iso) => { 
@@ -83,12 +83,12 @@ const Home = () => {
       return (
         <>
         <Header displayHeader={true} />
-        {(nowPlaying.fetching || comingSoon.fetching)  && <Spinner />}
+        {(nowPlaying?.fetching || topRated?.fetching)  && <Spinner />}
         <div className="home-container">
         <h2 className="home-section-title">Now Playing</h2>
-        {nowPlaying.status ? 
+        {nowPlaying?.status ? 
             (<Slider {...settings}>
-                {nowPlaying.data?.results?.map((item, index) => {
+                {nowPlaying?.data?.results?.map((item, index) => {
                     
                     return <div className="card-item" key={index}>
                                 <Link to={`/movie/${item.id}`}>
@@ -114,14 +114,14 @@ const Home = () => {
                             </div>
                 })}
             </Slider>)
-            : <div className="no-result">{comingSoon.message}</div>
+            : <div className="no-result">{nowPlaying?.message}</div>
         }
 
-        <h2 className="home-section-title">Coming Soon</h2>
+        <h2 className="home-section-title">Top Rated</h2>
 
-        {comingSoon.status ? 
+        {topRated.status ? 
             (<Slider {...settings}>
-                {comingSoon.data?.results?.map((item, index) => {
+                {topRated.data?.results?.map((item, index) => {
                     
                     return <div className="card-item" key={index}>
                                 <Link to={`/movie/${item.id}`}>
@@ -147,7 +147,7 @@ const Home = () => {
                             </div>
                 })}
             </Slider>)
-            : <div className="no-result">{comingSoon.message}</div>
+            : <div className="no-result">{topRated?.message}</div>
         }
 
       </div>

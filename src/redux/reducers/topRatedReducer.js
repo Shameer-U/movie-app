@@ -8,13 +8,13 @@ const initialState = {
     data : { }
 }
 
-export const comingSoonReducer = (state = initialState, {type, payload}) => {  
+export const topRatedReducer = (state = initialState, {type, payload}) => {  
     switch (type) {
-        case ActionTypes.FETCHING_COMING_SOON:
+        case ActionTypes.FETCHING_TOP_RATED:
             return {...state, ...payload}
-        case ActionTypes.FETCH_COMING_SOON:
+        case ActionTypes.FETCH_TOP_RATED:
             return {...state,  ...payload};
-        case ActionTypes.REMOVE_COMING_SOON:
+        case ActionTypes.REMOVE_TOP_RATED:
             return initialState;
         default:
             return state;

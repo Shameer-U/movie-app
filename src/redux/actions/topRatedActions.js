@@ -1,12 +1,12 @@
 import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
-const fetchComingSoon = () => (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_COMING_SOON, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}})
+const fetchTopRated = () => (dispatch) => {
+    dispatch({type:ActionTypes.FETCHING_TOP_RATED, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}})
 
     let payload;
     
-    movieApi.get('/movie/upcoming')
+    movieApi.get('/movie/top_rated')
             .then((response) => {
                 if (response?.status === 200) {
                     if (response?.data?.results?.length !== 0) {
@@ -36,7 +36,7 @@ const fetchComingSoon = () => (dispatch) => {
                     }
                 }
                 
-                dispatch({type:ActionTypes.FETCH_COMING_SOON, payload: payload});
+                dispatch({type:ActionTypes.FETCH_TOP_RATED, payload: payload});
             })
             .catch((error) => {
                 payload =  {
@@ -47,16 +47,16 @@ const fetchComingSoon = () => (dispatch) => {
                             data: {}
                         }
 
-                dispatch({type:ActionTypes.FETCH_COMING_SOON, payload: payload});
+                dispatch({type:ActionTypes.FETCH_TOP_RATED, payload: payload});
             })
     
-    //dispatch({type:ActionTypes.FETCH_COMING_SOON, payload: payload});
+    //dispatch({type:ActionTypes.FETCH_TOP_RATED, payload: payload});
 }
 
-const removeComingSoon = () => {
+const removeTopRated = () => {
     return {
-        type: ActionTypes.REMOVE_COMING_SOON,
+        type: ActionTypes.REMOVE_TOP_RATED,
     }
 }
 
-export {fetchComingSoon, removeComingSoon}
+export {fetchTopRated, removeTopRated}
