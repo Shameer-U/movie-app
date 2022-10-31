@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import './header.css'
+import './header.css';
 import { useDispatch } from "react-redux";
 import { fetchMoviesData } from "../../redux/actions/movieActions";
 import { addSearchTerm } from "../../redux/actions/searchActions";

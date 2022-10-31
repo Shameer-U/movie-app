@@ -8,15 +8,13 @@ import { fetchComingSoon } from "../../redux/actions/comingSoonActions";
 import Slider from "react-slick";
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import LANGUAGES from "../../constants/Languages";
-import IMAGES from '../../constants/Images'
+import IMAGES from '../../constants/Images';
 import Spinner from "../../components/spinner/Spinner";
 import {Link } from "react-router-dom";
 
 const Home = () => {
     const nowPlaying = useSelector((state) => state.nowPlayingState);
     const comingSoon = useSelector((state) => state.comingSoonState);
-    console.log('nowPlaying', nowPlaying);
-    console.log('comingSoon', comingSoon);
     const dispatch = useDispatch();
 
     useEffect(() => {

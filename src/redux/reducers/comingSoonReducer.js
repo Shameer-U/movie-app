@@ -10,11 +10,11 @@ const initialState = {
 
 export const comingSoonReducer = (state = initialState, {type, payload}) => {  
     switch (type) {
-        case ActionTypes.FETCHING_NOW_PLAYING:
+        case ActionTypes.FETCHING_COMING_SOON:
             return {...state, ...payload}
-        case ActionTypes.FETCH_NOW_PLAYING:
+        case ActionTypes.FETCH_COMING_SOON:
             return {...state,  ...payload};
-        case ActionTypes.REMOVE_NOW_PLAYING:
+        case ActionTypes.REMOVE_COMING_SOON:
             return initialState;
         default:
             return state;
