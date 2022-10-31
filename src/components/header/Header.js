@@ -39,6 +39,9 @@ const Header = (props) => {
 
     return (
         <div className='header'>
+            <div className="app-name" onClick={() => navigate('/')}>
+                <h4>Movie App</h4>
+            </div>
             { displayHeader &&
                 <div className='search-bar'>
                     <form onSubmit={submitHandler}>
