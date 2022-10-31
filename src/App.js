@@ -3,6 +3,8 @@ import Search from './pages/search/Search';
 import Home from './pages/home/Home';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import MovieDetail from './pages/movieDetail/MovieDetail';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (

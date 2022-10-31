@@ -1,12 +1,12 @@
 import movieApi from "../../constants/movieApi";
 import { ActionTypes } from "../constants/actionTypes"
 
-const fetchMovieDetail = (movieId) => async (dispatch) => {
+const fetchMovieDetail = (movieId, append_to_response = 'videos,credits' ) => async (dispatch) => {
     dispatch({type:ActionTypes.FETCHING_MOVIE_DETAIL, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}})
 
     let payload;
     
-    const response = await movieApi.get(`/movie/${movieId}`, { params: 'videos,images' })
+    const response = await movieApi.get(`/movie/${movieId}`, { params: { append_to_response }})
                                 .catch((error) => {
                                     return error.response
                                 });

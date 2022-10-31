@@ -13,16 +13,16 @@ import Spinner from "../../components/spinner/Spinner";
 import {Link } from "react-router-dom";
 
 const Home = () => {
-    const nowPlaying = useSelector((state) => state.nowPlayingState)
-    const comingSoon = useSelector((state) => state.comingSoonState)
-    console.log('nowPlaying', nowPlaying)
-    console.log('comingSoon', comingSoon)
-    const dispatch = useDispatch()
+    const nowPlaying = useSelector((state) => state.nowPlayingState);
+    const comingSoon = useSelector((state) => state.comingSoonState);
+    console.log('nowPlaying', nowPlaying);
+    console.log('comingSoon', comingSoon);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchNowPlaying())
         dispatch(fetchComingSoon())
-    }, [])
+    }, []);
 
     const getLanguage = (language_iso) => { 
         return LANGUAGES.find((language) => language.iso_639_1 === language_iso)

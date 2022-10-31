@@ -3,7 +3,7 @@ import './search.css';
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import Header from "../../components/header/Header";
 import LANGUAGES from "../../constants/Languages";
-import IMAGES from '../../constants/Images'
+import IMAGES from '../../constants/Images';
 import { useDispatch } from "react-redux";
 import { fetchMoviesData, removeMoviesData } from "../../redux/actions/movieActions";
 import { useSelector } from "react-redux";
@@ -19,11 +19,11 @@ const Search = () => {
         next : false,
         lastPage : false,
         totalPages: false,
-    })
-    const {state } = useLocation();
-    const moviesData = useSelector((state) => state.moviesState)
-    const dispatch = useDispatch()
-    const searchTerm = useSelector((state) => state.searchState.term)
+    });
+    const {state } = useLocation(); // searchTerm from Home page
+    const moviesData = useSelector((state) => state.moviesState);
+    const dispatch = useDispatch();
+    const searchTerm = useSelector((state) => state.searchState.term);
 
     useEffect(() => {
       if (moviesData.isLoaded === true) {
@@ -38,7 +38,7 @@ const Search = () => {
         })
       }
 
-    }, [moviesData.isLoaded])
+    }, [moviesData.isLoaded]);
 
 
     const changePage = (page) => {
@@ -55,7 +55,7 @@ const Search = () => {
 
   return (
     <>
-        <Header searchWord={state} displayHeader={true}/>
+        <Header searchWord={searchTerm} displayHeader={true}/>
         {moviesData.fetching && <Spinner />}
         <div>
             <div className="card-container">
