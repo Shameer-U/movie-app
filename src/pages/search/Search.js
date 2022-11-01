@@ -54,7 +54,7 @@ const Search = () => {
         <div>
             <div className="card-container">
                 { moviesData?.status ? ( moviesData?.data?.results?.map((item, index) => {
-                       return <MovieCard item={item} index={index}/>
+                       return <MovieCard item={item} index={index} width="200px"/>
                 })) : (
                 <div className="no-result">
                         <h3>{moviesData?.message}</h3>
