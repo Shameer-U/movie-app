@@ -6,11 +6,9 @@ import { useSelector } from "react-redux";
 import { fetchNowPlaying } from "../../redux/actions/nowPlayingActions";
 import { fetchTopRated } from "../../redux/actions/topRatedActions";
 import Slider from "react-slick";
-import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
-import LANGUAGES from "../../constants/Languages";
-import IMAGES from '../../constants/Images';
 import Spinner from "../../components/spinner/Spinner";
 import {Link } from "react-router-dom";
+import MovieCard from "../../components/movieCard/MovieCard";
 
 const Home = () => {
     const nowPlaying = useSelector((state) => state.nowPlayingState);
@@ -21,10 +19,6 @@ const Home = () => {
         dispatch(fetchNowPlaying())
         dispatch(fetchTopRated())
     }, []);
-
-    const getLanguage = (language_iso) => { 
-        return LANGUAGES.find((language) => language.iso_639_1 === language_iso)
-    }
 
     const settings = {
         dots: false,
@@ -89,29 +83,7 @@ const Home = () => {
         {nowPlaying?.status ? 
             (<Slider {...settings}>
                 {nowPlaying?.data?.results?.map((item, index) => {
-                    
-                    return <div className="card-item" key={index}>
-                                <Link to={`/movie/${item.id}`}>
-                                <div className="card-inner">
-                                    <div className="card-top">
-                                        <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />
-                                        <div className='card-rating'>
-                                            <img src={IMAGES.IMDB} />
-                                            <span >{item.vote_average}</span>
-                                        </div>
-                                    </div>
-                                    <div className="card-bottom">
-                                        <div className="movie-title">
-                                            <h4>{(item.title.length > 40) ? item.title.substring(0, 40) + '...' : item.title}</h4>
-                                        </div>
-                                        <div className="movie-subtitle">
-                                            <p>{getLanguage(item.original_language).english_name}</p>
-                                            <span><i className='fa fa-heart'></i>{item.vote_count}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </Link>
-                            </div>
+                    return <MovieCard item={item} index={index}/>
                 })}
             </Slider>)
             : <div className="no-result">{nowPlaying?.message}</div>
@@ -119,32 +91,10 @@ const Home = () => {
 
         <h2 className="home-section-title">Top Rated</h2>
 
-        {topRated.status ? 
+        {topRated?.status ? 
             (<Slider {...settings}>
-                {topRated.data?.results?.map((item, index) => {
-                    
-                    return <div className="card-item" key={index}>
-                                <Link to={`/movie/${item.id}`}>
-                                <div className="card-inner">
-                                    <div className="card-top">
-                                        <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />
-                                        <div className='card-rating'>
-                                            <img src={IMAGES.IMDB} />
-                                            <span >{item.vote_average}</span>
-                                        </div>
-                                    </div>
-                                    <div className="card-bottom">
-                                        <div className="movie-title">
-                                            <h4>{(item.title.length > 40) ? item.title.substring(0, 40) + '...' : item.title}</h4>
-                                        </div>
-                                        <div className="movie-subtitle">
-                                            <p>{getLanguage(item.original_language).english_name}</p>
-                                            <span><i className='fa fa-heart'></i>{item.vote_count}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </Link>
-                            </div>
+                {topRated?.data?.results?.map((item, index) => {
+                    return <MovieCard item={item} index={index}/>
                 })}
             </Slider>)
             : <div className="no-result">{topRated?.message}</div>

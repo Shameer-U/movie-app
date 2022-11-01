@@ -1,14 +1,12 @@
 import { useState , useEffect} from "react";
 import './search.css';
-import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import Header from "../../components/header/Header";
-import LANGUAGES from "../../constants/Languages";
-import IMAGES from '../../constants/Images';
 import { useDispatch } from "react-redux";
 import { fetchMoviesData, removeMoviesData } from "../../redux/actions/movieActions";
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/Spinner";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import MovieCard from "../../components/movieCard/MovieCard";
 
 
 const Search = () => {
@@ -49,40 +47,14 @@ const Search = () => {
        dispatch(fetchMoviesData(searchTerm, page))
     }
 
-    const getLanguage = (language_iso) => { 
-        return LANGUAGES.find((language) => language.iso_639_1 === language_iso)
-    }
-
   return (
     <>
         <Header searchWord={searchTerm} displayHeader={true}/>
-        {moviesData.fetching && <Spinner />}
+        {moviesData?.fetching && <Spinner />}
         <div>
             <div className="card-container">
-                { moviesData.status ? ( moviesData.data?.results?.map((item, index) => {
-                    
-                    return <div className="card-item" key={index}>
-                                <Link to={`/movie/${item.id}`}>
-                                <div className="card-inner">
-                                    <div className="card-top">
-                                        <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`} alt='' />
-                                        <div className='card-rating'>
-                                            <img src={IMAGES.IMDB} />
-                                            <span >{item.vote_average}</span>
-                                        </div>
-                                    </div>
-                                    <div className="card-bottom">
-                                        <div className="movie-title">
-                                            <h4>{(item.title.length > 40) ? item.title.substring(0, 40) + '...' : item.title}</h4>
-                                        </div>
-                                        <div className="movie-subtitle">
-                                            <p>{getLanguage(item.original_language).english_name}</p>
-                                            <span><i className='fa fa-heart'></i>{item.vote_count}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </Link>
-                            </div>
+                { moviesData?.status ? ( moviesData?.data?.results?.map((item, index) => {
+                       return <MovieCard item={item} index={index}/>
                 })) : (
                 <div className="no-result">
                         <h3>{moviesData?.message}</h3>
@@ -90,7 +62,7 @@ const Search = () => {
                 }
             </div>
   
-            { (moviesData.status && moviesData.data?.results?.length !== 0) &&
+            { (moviesData?.status && moviesData?.data?.results?.length !== 0) &&
                 <div className="pagination-container">
                     <div className="pagination">
                       { pagination.firstPage  && <button onClick={() => changePage(pagination.firstPage)}>First</button>}
