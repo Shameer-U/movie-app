@@ -1,5 +1,5 @@
 .search-container {
-    background-color: #F5F7FA;
+    background-color: var(--background);
 }
 
 .card-container {
@@ -10,7 +10,7 @@
     row-gap: 30px;
     padding: 20px;
     max-width: 1024px;
-    margin: 10px auto;
+    margin: 90px auto 10px auto;
 }
 
 .no-result {
@@ -44,7 +44,7 @@
 
 .pagination button{
     padding: 10px;
-    background-color: rgba(3,37,65, 1);
+    background-color: var(--main-color);
     color: #fff;
     border-radius: 5px;
     border: none;
@@ -53,6 +53,12 @@
 .pagination span{ 
     padding: 10px;
     font-size: 14px;
-    border: 2px solid rgba(3,37,65, 1);
+    border: 2px solid var(--main-color);
     font-weight: 500;
+}
+
+@media(max-width: 768px) { 
+    .card-container {
+        margin-top: 110px;
+     }
 }

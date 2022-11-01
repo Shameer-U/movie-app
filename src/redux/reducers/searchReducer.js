@@ -1,8 +1,8 @@
-import { ActionTypes } from "../constants/actionTypes"
+import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
     term: '',
-}
+};
 
 export const searchReducer = (state = initialState, action) => {  
     switch (action.type) {

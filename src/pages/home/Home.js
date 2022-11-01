@@ -7,7 +7,6 @@ import { fetchNowPlaying } from "../../redux/actions/nowPlayingActions";
 import { fetchTopRated } from "../../redux/actions/topRatedActions";
 import Slider from "react-slick";
 import Spinner from "../../components/spinner/Spinner";
-import {Link } from "react-router-dom";
 import MovieCard from "../../components/movieCard/MovieCard";
 
 const Home = () => {
@@ -16,8 +15,8 @@ const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchNowPlaying())
-        dispatch(fetchTopRated())
+        dispatch(fetchNowPlaying());
+        dispatch(fetchTopRated());
     }, []);
 
     const settings = {
@@ -76,17 +75,17 @@ const Home = () => {
 
       return (
         <>
-        <Header displayHeader={true} />
-        {(nowPlaying?.fetching || topRated?.fetching)  && <Spinner />}
+        <Header displaySearch={true} />
+        {(nowPlaying?.fetching || topRated?.fetching)  ? <Spinner /> : null}
         <div className="home-container">
         <h2 className="home-section-title">Now Playing</h2>
         {nowPlaying?.status ? 
             (<Slider {...settings}>
                 {nowPlaying?.data?.results?.map((item, index) => {
-                    return <MovieCard item={item} index={index}/>
+                    return <MovieCard item={item} index={index}/>;
                 })}
             </Slider>)
-            : <div className="no-result">{nowPlaying?.message}</div>
+            : (<div className="no-result">{nowPlaying?.message}</div>)
         }
 
         <h2 className="home-section-title">Top Rated</h2>
@@ -94,10 +93,10 @@ const Home = () => {
         {topRated?.status ? 
             (<Slider {...settings}>
                 {topRated?.data?.results?.map((item, index) => {
-                    return <MovieCard item={item} index={index}/>
+                    return <MovieCard item={item} index={index}/>;
                 })}
             </Slider>)
-            : <div className="no-result">{topRated?.message}</div>
+            : (<div className="no-result">{topRated?.message}</div>)
         }
 
       </div>
@@ -105,4 +104,4 @@ const Home = () => {
       );
 }
 
-export default Home
+export default Home;

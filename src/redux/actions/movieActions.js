@@ -1,5 +1,5 @@
 import movieApi from "../../constants/movieApi";
-import { ActionTypes } from "../constants/actionTypes"
+import { ActionTypes } from "../constants/actionTypes";
 
 const fetchMoviesData = (term, page) => async (dispatch) => {
     dispatch({type:ActionTypes.FETCHING_MOVIES_DATA, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}});
@@ -42,7 +42,7 @@ const fetchMoviesData = (term, page) => async (dispatch) => {
           isLoaded: false,
           message: `Movie data not found`,
           data: {}
-        };
+        }
     }
     
     dispatch({type:ActionTypes.FETCH_MOVIES_DATA, payload:payload});
@@ -51,7 +51,7 @@ const fetchMoviesData = (term, page) => async (dispatch) => {
 const removeMoviesData = () => {
     return {
         type: ActionTypes.REMOVE_MOVIES_DATA,
-    }
+    };
 }
 
 export {fetchMoviesData, removeMoviesData}

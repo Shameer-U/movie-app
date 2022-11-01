@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/actionTypes"
+import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
     message : 'Movie data not found',
@@ -6,12 +6,12 @@ const initialState = {
     fetching : false,
     isLoaded : false,
     data : { }
-}
+};
 
 export const topRatedReducer = (state = initialState, {type, payload}) => {  
     switch (type) {
         case ActionTypes.FETCHING_TOP_RATED:
-            return {...state, ...payload}
+            return {...state, ...payload};
         case ActionTypes.FETCH_TOP_RATED:
             return {...state,  ...payload};
         case ActionTypes.REMOVE_TOP_RATED:

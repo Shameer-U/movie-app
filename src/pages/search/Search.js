@@ -25,7 +25,7 @@ const Search = () => {
 
     useEffect(() => {
       if (moviesData.isLoaded === true) {
-         const {page, total_pages} = moviesData.data
+         const {page, total_pages} = moviesData.data;
         setPagination({
             firstPage: page > 2 ? 1 : false,
             previous: page > 1 ? Number(page) - 1 : false,
@@ -33,23 +33,23 @@ const Search = () => {
             next : (Number(page) + 1) <= total_pages ? Number(page) + 1 : false,
             lastPage: (Number(page) + 1) < total_pages ? total_pages : false,
             totalPages: total_pages
-        })
+        });
       }
 
     }, [moviesData.isLoaded]);
 
 
     const changePage = (page) => {
-        search(searchTerm, page)
+        search(searchTerm, page);
     }
 
     const search = (searchTerm, page) => {
-       dispatch(fetchMoviesData(searchTerm, page))
+       dispatch(fetchMoviesData(searchTerm, page));
     }
 
   return (
     <>
-        <Header searchWord={searchTerm} displayHeader={true}/>
+        <Header searchWord={searchTerm} displaySearch={true}/>
         {moviesData?.fetching && <Spinner />}
         <div>
             <div className="card-container">
@@ -63,7 +63,7 @@ const Search = () => {
             </div>
   
             { (moviesData?.status && moviesData?.data?.results?.length !== 0) &&
-                <div className="pagination-container">
+                (<div className="pagination-container">
                     <div className="pagination">
                       { pagination.firstPage  && <button onClick={() => changePage(pagination.firstPage)}>First</button>}
                       { pagination.previous  && <button className="previous" onClick={() => changePage(pagination.previous)}></button>}
@@ -71,11 +71,11 @@ const Search = () => {
                       { pagination.next &&  <button className="next" onClick={() => changePage(pagination.next)}></button> }
                       { pagination.lastPage &&  <button onClick={() => changePage(pagination.lastPage)}>Last</button> }
                     </div>
-                </div>
+                </div>)
             }
         </div>
     </>
-  )
+  );
 }
 
-export default Search
+export default Search;

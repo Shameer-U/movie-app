@@ -1,14 +1,14 @@
 import movieApi from "../../constants/movieApi";
-import { ActionTypes } from "../constants/actionTypes"
+import { ActionTypes } from "../constants/actionTypes";
 
 const fetchMovieDetail = (movieId, append_to_response = 'videos,credits' ) => async (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_MOVIE_DETAIL, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}})
+    dispatch({type:ActionTypes.FETCHING_MOVIE_DETAIL, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}});
 
     let payload;
     
     const response = await movieApi.get(`/movie/${movieId}`, { params: { append_to_response }})
                                 .catch((error) => {
-                                    return error.response
+                                    return error.response;
                                 });
 
     if (response?.status === 200) {
@@ -45,7 +45,7 @@ const fetchMovieDetail = (movieId, append_to_response = 'videos,credits' ) => as
 const removeMovieDetail = () => {
     return {
         type: ActionTypes.REMOVE_MOVIE_DETAIL,
-    }
+    };
 }
 
 export {fetchMovieDetail, removeMovieDetail}

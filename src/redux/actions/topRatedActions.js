@@ -1,8 +1,8 @@
 import movieApi from "../../constants/movieApi";
-import { ActionTypes } from "../constants/actionTypes"
+import { ActionTypes } from "../constants/actionTypes";
 
-const fetchTopRated = () => (dispatch) => {
-    dispatch({type:ActionTypes.FETCHING_TOP_RATED, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}})
+export const fetchTopRated = () => (dispatch) => {
+    dispatch({type:ActionTypes.FETCHING_TOP_RATED, payload: {fetching : true, isLoaded: false, message: `Fetching data...`,}});
 
     let payload;
     
@@ -48,15 +48,13 @@ const fetchTopRated = () => (dispatch) => {
                         }
 
                 dispatch({type:ActionTypes.FETCH_TOP_RATED, payload: payload});
-            })
+            });
     
     //dispatch({type:ActionTypes.FETCH_TOP_RATED, payload: payload});
 }
 
-const removeTopRated = () => {
+export const removeTopRated = () => {
     return {
         type: ActionTypes.REMOVE_TOP_RATED,
-    }
+    };
 }
-
-export {fetchTopRated, removeTopRated}

@@ -4,7 +4,17 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-color: rgba(3,37,65, 1);
+  --background: #F5F7FA;
+  --title: #7C7C7C;
+}
+
+body {
+  background-color: var(--background);
+}
+
 a {
   text-decoration: none;
-  color: none;
+  color: #000;;
 }

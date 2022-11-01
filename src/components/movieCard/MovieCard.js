@@ -6,15 +6,14 @@ import IMAGES from '../../constants/Images';
 
 const MovieCard = ({item, index}) => {
     const getLanguage = (language_iso) => { 
-        return LANGUAGES.find((language) => language.iso_639_1 === language_iso)
+        return LANGUAGES.find((language) => language.iso_639_1 === language_iso);
     }
 
-    return (
-        <div className="card-item" key={index}>
+    return (<div className="card-item" key={index}>
             <Link to={`/movie/${item?.id}`}>
                 <div className="card-inner">
                     <div className="card-top">
-                        <img className="card-poster" src={`${TMDB_IMAGE_BASE_URL}/original${item?.poster_path}`} alt='' />
+                        <img className="card-poster" src={item?.poster_path ? `${TMDB_IMAGE_BASE_URL}/original${item?.poster_path}` : IMAGES.NO_IMAGE} alt='Movie poster' />
                         <div className='card-rating'>
                             <img src={IMAGES.IMDB} />
                             <span>{item?.vote_average}</span>
@@ -31,8 +30,7 @@ const MovieCard = ({item, index}) => {
                     </div>
                 </div>
             </Link>
-        </div>
-    )
+        </div>);
 }
 
-export default MovieCard
+export default MovieCard;

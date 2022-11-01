@@ -28,7 +28,7 @@ const MovieDetail = () => {
     const castOrCrew = isCastSelected ? data?.credits?.cast : data?.credits?.crew;
 
     const getLanguage = (language_iso) => { 
-        return LANGUAGES.find((language) => language.iso_639_1 === language_iso)
+        return LANGUAGES.find((language) => language.iso_639_1 === language_iso);
     }
 
     const onPlayerReady = (event) => {
@@ -47,11 +47,11 @@ const MovieDetail = () => {
 
     return (
         <>
-            <Header displayHeader={false}/>
+            <Header/>
             {fetching && <Spinner />}
             <div className="movie-container">
                 <div className="movie-detail-container">
-                    { youTubeVideoId !== undefined ?
+                    { youTubeVideoId ?
                         (<div className="movie-teaser">
                             <YouTube videoId={youTubeVideoId} opts={opts} onReady={onPlayerReady} className='u-tube'/>
                         </div>)
@@ -93,21 +93,21 @@ const MovieDetail = () => {
                         <div className="movie-detail-card-container">
                             { castOrCrew ? ( castOrCrew.map((item, index) => {
                                 
-                                return <div className="movie-detail-card-item" key={index}>
+                                return (<div className="movie-detail-card-item" key={index}>
                                             <div className="movie-detail-card-inner">
                                                 <div className="movie-detail-card-top">
-                                                    <img className="movie-detail-card-poster" src={ item.profile_path ? `${TMDB_IMAGE_BASE_URL}/original${item.profile_path}` : IMAGES.NO_IMAGE} alt='' />
+                                                    <img className="movie-detail-card-poster" src={ item?.profile_path ? `${TMDB_IMAGE_BASE_URL}/original${item.profile_path}` : IMAGES.NO_IMAGE} alt='Image' />
                                                 </div>
                                                 <div className="movie-detail-card-bottom">
                                                     <div className="movie-detail-card-bottom-title">
-                                                        <h4>{(item.name.length > 40) ? item.name.substring(0, 40) + '...' : item.name}</h4>
+                                                        <h4>{(item?.name?.length > 40) ? item?.name.substring(0, 40) + '...' : item?.name}</h4>
                                                     </div>
                                                     <div className="movie-detail-card-bottom-subtitle">
                                                         <p>{ isCastSelected ? item?.character : item?.job}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>);
                             })) : (
                             <div className="movie-detail-no-result">
                                     <h3>Data not availble</h3>
@@ -118,7 +118,7 @@ const MovieDetail = () => {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default MovieDetail
+export default MovieDetail;
