@@ -10,6 +10,7 @@ import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import YouTube, { YouTubeProps } from 'react-youtube';
 import IMAGES from '../../constants/Images';
 import Spinner from "../../components/spinner/Spinner";
+import { FaHeart } from "react-icons/fa";
 
 const MovieDetail = () => {
     const {movieId} = useParams();
@@ -68,7 +69,7 @@ const MovieDetail = () => {
                                 {data?.original_title}
                             </h4>
                             <div className="movie-likes">
-                                <i className="fa fa-heart"></i>
+                                <FaHeart />
                                 <span >{data?.vote_average}</span>
                             </div>
                         </div>

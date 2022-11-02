@@ -80,6 +80,6 @@
     column-gap: 5px;
 }
 
-.card-subtitle span i {
+.card-subtitle span svg {
    color: red;
 }

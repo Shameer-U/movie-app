@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { fetchMoviesData } from "../../redux/actions/movieActions";
 import { addSearchTerm } from "../../redux/actions/searchActions";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { FaSearch } from "react-icons/fa";
 
 const Header = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -47,7 +48,7 @@ const Header = (props) => {
                     (<div className='search-bar'>
                         <form onSubmit={submitHandler}>
                             <input type="text" value={searchTerm} placeholder="Search Movies" onChange={(e) => setSearchTerm(e.target.value)} />
-                            <button type="submit"><i className='fa fa-search'></i></button>
+                            <button type="submit"><FaSearch /></button>
                         </form>
                     </div>)
                 }

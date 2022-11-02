@@ -46,7 +46,7 @@
     gap: 10px;
 }
 
-.movie-likes .fa-heart {
+.movie-likes svg {
     color: red;
 }
 

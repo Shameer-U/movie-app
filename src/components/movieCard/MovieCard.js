@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
 import LANGUAGES from "../../constants/Languages";
 import IMAGES from '../../constants/Images';
+import { FaHeart } from "react-icons/fa";
 
 const MovieCard = ({item, index, width}) => {
     const getLanguage = (language_iso) => { 
@@ -25,7 +26,7 @@ const MovieCard = ({item, index, width}) => {
                         </div>
                         <div className="card-subtitle">
                             <p>{getLanguage(item?.original_language)?.english_name}</p>
-                            <span><i className='fa fa-heart'></i>{item?.vote_count}</span>
+                            <span><FaHeart />{item?.vote_count}</span>
                         </div>
                     </div>
                 </div>
