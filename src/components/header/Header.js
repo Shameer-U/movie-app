@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import './header.css';
 import { useDispatch } from "react-redux";
 import { fetchMoviesData } from "../../redux/actions/movieActions";
@@ -7,44 +7,34 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 
 const Header = (props) => {
-    //const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
     const dispatch = useDispatch(); 
     const location = useLocation();
     const navigate = useNavigate();
     const {searchWord, displaySearch} = props;
-    const searchRef = useRef();
     
     const submitHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // if(searchTerm === '') {
-        //     return alert('Please enter search term');
-        // }
-        // dispatch(addSearchTerm(searchTerm));
-        // search(searchTerm, 1);
-
-        const value = searchRef.current.value;
-        dispatch(addSearchTerm(value));
-        search(value, 1);
+        if(searchTerm === '') {
+            return alert('Please enter search term');
+        }
+        dispatch(addSearchTerm(searchTerm));
+        search(searchTerm, 1);
     
         //console.log(location.pathname);
         if(location.pathname !== '/search') {
-            navigate('/search', { state : value});
+            navigate('/search', { state : searchTerm});
         }
-
-        //searchRef.current.value = ""; //removing value from seach input
     }
 
     const search = (term, page) => {
         dispatch(fetchMoviesData(term, page));
     }
 
-    console.log('Header load');
-
     useEffect(() => {
-        if (searchRef.current.value === '' && searchWord !== undefined) {
-            //setSearchTerm(searchWord);
-            searchRef.current.value = searchWord;
+        if (searchTerm === '' && searchWord !== undefined) {
+            setSearchTerm(searchWord);
         }
     },[]);
 
@@ -57,8 +47,7 @@ const Header = (props) => {
                 { displaySearch &&
                     (<div className='search-bar'>
                         <form onSubmit={submitHandler}>
-                            {/* <input type="text" value={searchTerm} placeholder="Search Movies" onChange={(e) => setSearchTerm(e.target.value)} /> */}
-                            <input type="text" ref={searchRef} placeholder="Search Movies" />
+                            <input type="text" value={searchTerm} placeholder="Search Movies" onChange={(e) => setSearchTerm(e.target.value)} />
                             <button type="submit"><FaSearch /></button>
                         </form>
                     </div>)
