@@ -52,7 +52,7 @@
     cursor: pointer;
     height: 38px;
     background-color: var(--main-color);
-    color: rgba(1,180,228);
+    color: red;
     border:none;
 }
 
