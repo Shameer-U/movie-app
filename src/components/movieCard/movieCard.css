@@ -1,11 +1,17 @@
 .card-item {
     /* width: 200px; */
     border-radius: 10px;
-    border: 1px solid #e3e3e3;
     background-color: #fff;
+    /* border: 1px solid #e3e3e3; */
+    -webkit-box-shadow: 0px 4px 20px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 20px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 20px -6px rgb(0,0,0,0.75);
+    transition: all 0.3s ease;
 }
 
-.card-inner {
+.card-item:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
 
 .card-top {

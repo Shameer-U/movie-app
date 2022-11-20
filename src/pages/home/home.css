@@ -2,18 +2,25 @@
     margin: 90px 40px 0 40px;
 }
 
-.slick-prev:before, .slick-next:before { 
-    color:red !important;
-    font-size: 30px;
-}
-
+/**slick related styles**/
 /*adding space between slick slides*/
 .slick-slider .slick-slide {
     padding: 0 10px;
  }
 
+.slick-list {
+   padding-top: 30px !important;
+   padding-bottom: 30px !important;
+}
+
+.slick-prev:before, .slick-next:before { 
+    color:red !important;
+    font-size: 30px;
+}
+/**end**/
+
 .home-section-title {
-    margin: 20px 0px;
+    padding-top: 30px;
 }
 
 .no-result {
