@@ -3,8 +3,8 @@ import Header from "../../components/header/Header";
 import './home.css';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { fetchNowPlaying } from "../../redux/actions/nowPlayingActions";
-import { fetchTopRated } from "../../redux/actions/topRatedActions";
+import { fetchNowPlaying, removeNowPlaying } from "../../redux/actions/nowPlayingActions";
+import { fetchTopRated, removeTopRated } from "../../redux/actions/topRatedActions";
 import Slider from "react-slick";
 import Spinner from "../../components/spinner/Spinner";
 import MovieCard from "../../components/movieCard/MovieCard";
@@ -17,6 +17,11 @@ const Home = () => {
     useEffect(() => {
         dispatch(fetchNowPlaying());
         dispatch(fetchTopRated());
+
+        return () => {
+          dispatch(removeNowPlaying());
+          dispatch(removeTopRated());
+        }
     }, []);
 
     const settings = {
@@ -82,7 +87,7 @@ const Home = () => {
         {nowPlaying?.status ? 
             (<Slider {...settings}>
                 {nowPlaying?.data?.results?.map((item, index) => {
-                    return <MovieCard item={item} index={index}/>;
+                    return <MovieCard item={item} index={index} key={index}/>;
                 })}
             </Slider>)
             : (<div className="no-result">{nowPlaying?.message}</div>)
@@ -93,7 +98,7 @@ const Home = () => {
         {topRated?.status ? 
             (<Slider {...settings}>
                 {topRated?.data?.results?.map((item, index) => {
-                    return <MovieCard item={item} index={index}/>;
+                    return <MovieCard item={item} index={index} key={index}/>;
                 })}
             </Slider>)
             : (<div className="no-result">{topRated?.message}</div>)

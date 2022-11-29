@@ -49,8 +49,16 @@ const fetchNowPlaying = () => async (dispatch) => {
 }
 
 const removeNowPlaying = () => {
+    const payload =  {
+        status: true,
+        fetching : false,
+        isLoaded: true,
+        message: `Movie data removed`,
+        data: {},
+    }
+
     return {
-        type: ActionTypes.REMOVE_NOW_PLAYING,
+        type: ActionTypes.REMOVE_NOW_PLAYING, payload
     };
 }
 

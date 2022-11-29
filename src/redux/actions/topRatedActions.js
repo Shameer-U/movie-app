@@ -54,7 +54,15 @@ export const fetchTopRated = () => (dispatch) => {
 }
 
 export const removeTopRated = () => {
+    const payload =  {
+        status: true,
+        fetching : false,
+        isLoaded: true,
+        message: `Movie data removed`,
+        data: {},
+    }
+
     return {
-        type: ActionTypes.REMOVE_TOP_RATED,
+        type: ActionTypes.REMOVE_TOP_RATED, payload
     };
 }

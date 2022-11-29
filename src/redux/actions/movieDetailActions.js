@@ -43,8 +43,16 @@ const fetchMovieDetail = (movieId, append_to_response = 'videos,credits' ) => as
 }
 
 const removeMovieDetail = () => {
+    const payload =  {
+        status: true,
+        fetching : false,
+        isLoaded: true,
+        message: `Movie data removed`,
+        data: {}
+    }
+
     return {
-        type: ActionTypes.REMOVE_MOVIE_DETAIL,
+        type: ActionTypes.REMOVE_MOVIE_DETAIL, payload
     };
 }
 

@@ -15,7 +15,7 @@ export const movieDetailReducer = (state = initialState, {type, payload}) => {
         case ActionTypes.FETCH_MOVIE_DETAIL:
             return {...state,  ...payload};
         case ActionTypes.REMOVE_MOVIE_DETAIL:
-            return initialState;
+            return {...state,  ...payload};
         default:
             return state;
     }

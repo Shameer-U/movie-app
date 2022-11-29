@@ -15,7 +15,7 @@ export const nowPlayingReducer = (state = initialState, {type, payload}) => {
         case ActionTypes.FETCH_NOW_PLAYING:
             return {...state,  ...payload};
         case ActionTypes.REMOVE_NOW_PLAYING:
-            return initialState;
+            return {...state, ...payload};
         default:
             return state;
     }

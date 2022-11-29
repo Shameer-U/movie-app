@@ -15,7 +15,7 @@ export const topRatedReducer = (state = initialState, {type, payload}) => {
         case ActionTypes.FETCH_TOP_RATED:
             return {...state,  ...payload};
         case ActionTypes.REMOVE_TOP_RATED:
-            return initialState;
+            return {...state,  ...payload};
         default:
             return state;
     }

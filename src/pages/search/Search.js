@@ -36,6 +36,17 @@ const Search = () => {
         });
       }
 
+      return () => {
+          setPagination({
+            firstPage: false,
+            previous: false,
+            current : false,
+            next : false,
+            lastPage : false,
+            totalPages: false,
+          });
+      }
+
     }, [moviesData.isLoaded]);
 
 
@@ -54,7 +65,7 @@ const Search = () => {
         <div>
             <div className="card-container">
                 { moviesData?.status ? ( moviesData?.data?.results?.map((item, index) => {
-                       return <MovieCard item={item} index={index} width="200px"/>
+                       return <MovieCard item={item} index={index} width="200px" key={index}/>
                 })) : (
                 <div className="no-result">
                         <h3>{moviesData?.message}</h3>
