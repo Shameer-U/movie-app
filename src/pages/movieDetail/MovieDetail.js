@@ -7,7 +7,7 @@ import LANGUAGES from "../../constants/Languages";
 import './movieDetail.css';
 import Header from "../../components/header/Header";
 import { TMDB_IMAGE_BASE_URL } from "../../constants/Urls";
-import YouTube, { YouTubeProps } from 'react-youtube';
+//import YouTube, { YouTubeProps } from 'react-youtube';
 import IMAGES from '../../constants/Images';
 import Spinner from "../../components/spinner/Spinner";
 import { FaHeart } from "react-icons/fa";
@@ -44,7 +44,7 @@ const MovieDetail = () => {
         },
     }
 
-    const youTubeVideoId = data?.videos?.results?.filter((result) => {return result.type === 'Teaser'})[0]?.key;
+    //const youTubeVideoId = data?.videos?.results?.filter((result) => {return result.type === 'Teaser'})[0]?.key;
 
     return (
         <>
@@ -52,7 +52,7 @@ const MovieDetail = () => {
             {fetching && <Spinner />}
             <div className="movie-container">
                 <div className="movie-detail-container">
-                    { youTubeVideoId ?
+                    {/* { youTubeVideoId ?
                         (<div className="movie-teaser">
                             <YouTube videoId={youTubeVideoId} opts={opts} onReady={onPlayerReady} className='u-tube'/>
                         </div>)
@@ -62,7 +62,10 @@ const MovieDetail = () => {
                                <h4>Video not available</h4>
                           </div>
                         )
-                    }
+                    } */}
+                    <div style={{height:'400px', display:'flex', justifyContent:'center', alignItems:'center'}}>
+                        <img style={{width:'400px', maxHeight: '100%', objectFit:'fill'}}  src={data?.poster_path ? `${TMDB_IMAGE_BASE_URL}/original${data?.poster_path}` : IMAGES.NO_IMAGE} alt='Movie poster' />
+                    </div>
                     <div className="basic-info">
                         <div className="title-and-likes">
                             <h4 className="movie-title">
